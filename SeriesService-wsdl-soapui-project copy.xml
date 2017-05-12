@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="fb46591e-ed80-41db-86d6-b0040795c2d6" activeEnvironment="Default" name="SeriesService?wsdl" resourceRoot="" soapui-version="5.3.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="91a0b95e-c7a3-469e-8ae2-1838f1848ce5" wsaVersion="NONE" name="SeriesBinding" type="wsdl" bindingName="{http://www.ttu.ee/idu0075/2017/ws/sportsseries}SeriesBinding" soapVersion="1_1" anonymous="optional" definition="http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService?wsdl"><con:part><con:url>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown.-->
+<wsdl:definitions targetNamespace="http://www.ttu.ee/idu0075/2017/ws/sportsseries" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.ttu.ee/idu0075/2017/ws/sportsseries" elementFormDefault="qualified">
+      <xs:complexType name="eventType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="place" type="xs:string"/>
+          <xs:element name="date" type="xs:date"/>
+          <xs:element name="typeOfSport" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="seriesEventType">
+        <xs:sequence>
+          <xs:element name="Event" type="tns:eventType"/>
+          <xs:element name="Series" type="tns:seriesType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="seriesEventListType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="seriesEvent" type="tns:seriesEventType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="seriesType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="seriesName" type="xs:string"/>
+          <xs:element name="seriesStartDate" type="xs:date"/>
+          <xs:element name="seriesEndDate" type="xs:date"/>
+          <xs:element name="numOfEvents" type="xs:integer"/>
+          <xs:element name="typeOfSport" type="xs:string"/>
+          <xs:element name="seriesEventList" type="tns:seriesEventListType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getEventRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEventResponse" type="tns:eventType"/>
+      <xs:element name="addEventRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="place" type="xs:string"/>
+            <xs:element name="date" type="xs:date"/>
+            <xs:element name="typeOfSport" type="xs:string"/>
+            <xs:element name="requestId" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addEventResponse" type="tns:eventType"/>
+      <xs:element name="getEventListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEventListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Event" type="tns:eventType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSeriesRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+            <xs:element name="requestId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSeriesResponse" type="tns:seriesType"/>
+      <xs:element name="addSeriesRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="SeriesName" type="xs:string"/>
+            <xs:element name="SeriesStartDate" type="xs:date"/>
+            <xs:element name="SeriesEndDate" type="xs:date"/>
+            <xs:element name="numOfEvents" type="xs:integer"/>
+            <xs:element name="typeOfSport" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addSeriesResponse" type="tns:seriesType"/>
+      <xs:element name="getSeriesListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="startDate" type="xs:date"/>
+            <xs:element name="endDate" type="xs:date"/>
+            <xs:element name="requestId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSeriesListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Series" type="tns:seriesType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSeriesEventListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="SeriesId" type="xs:integer"/>
+            <xs:element name="requestId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSeriesEventListResponse" type="tns:seriesEventListType"/>
+      <xs:element name="addSeriesEventRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="SeriesId" type="xs:integer"/>
+            <xs:element name="EventId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addSeriesEventResponse" type="tns:seriesEventType"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getEventMessageRequest">
+    <wsdl:part name="parameter" element="tns:getEventRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getEventMessageResponse">
+    <wsdl:part name="parameter" element="tns:getEventResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addEventMessageRequest">
+    <wsdl:part name="parameter" element="tns:addEventRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addEventMessageResponse">
+    <wsdl:part name="parameter" element="tns:addEventResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getEventListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getEventListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getEventListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getEventListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getSeriesMessageRequest">
+    <wsdl:part name="parameter" element="tns:getSeriesRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getSeriesMessageResponse">
+    <wsdl:part name="parameter" element="tns:getSeriesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addSeriesMessageRequest">
+    <wsdl:part name="parameter" element="tns:addSeriesRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addSeriesMessageResponse">
+    <wsdl:part name="parameter" element="tns:addSeriesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getSeriesListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getSeriesListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getSeriesListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getSeriesListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getSeriesEventListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getSeriesEventListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getSeriesEventListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getSeriesEventListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addSeriesEventMessageRequest">
+    <wsdl:part name="parameter" element="tns:addSeriesEventRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addSeriesEventMessageResponse">
+    <wsdl:part name="parameter" element="tns:addSeriesEventResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="SeriesPortType">
+    <wsdl:operation name="getEvent">
+      <wsdl:input message="tns:getEventMessageRequest"/>
+      <wsdl:output message="tns:getEventMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addEvent">
+      <wsdl:input message="tns:addEventMessageRequest"/>
+      <wsdl:output message="tns:addEventMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getEventList">
+      <wsdl:input message="tns:getEventListMessageRequest"/>
+      <wsdl:output message="tns:getEventListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getSeries">
+      <wsdl:input message="tns:getSeriesMessageRequest"/>
+      <wsdl:output message="tns:getSeriesMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addSeries">
+      <wsdl:input message="tns:addSeriesMessageRequest"/>
+      <wsdl:output message="tns:addSeriesMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getSeriesList">
+      <wsdl:input message="tns:getSeriesListMessageRequest"/>
+      <wsdl:output message="tns:getSeriesListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getSeriesEventList">
+      <wsdl:input message="tns:getSeriesEventListMessageRequest"/>
+      <wsdl:output message="tns:getSeriesEventListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addSeriesEvent">
+      <wsdl:input message="tns:addSeriesEventMessageRequest"/>
+      <wsdl:output message="tns:addSeriesEventMessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SeriesBinding" type="tns:SeriesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getEvent">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addEvent">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEventList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSeries">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addSeries">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSeriesList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSeriesEventList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addSeriesEvent">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SeriesService">
+    <wsdl:port name="SeriesPort" binding="tns:SeriesBinding">
+      <soap:address location="http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint></con:endpoints><con:operation id="58b1c8a8-a598-4215-b652-5078dad2e889" isOneWay="false" action="" name="addEvent" bindingOperationName="addEvent" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="877a5713-dd13-4be3-beb5-39c87bda0ee9" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spor="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spor:addEventRequest>
+         <spor:token>salasona</spor:token>
+         <spor:name>ujumisvõistlus</spor:name>
+         <!--Optional:-->
+         <spor:place>bassein</spor:place>
+         <spor:date>2017-05-30</spor:date>
+         <spor:typeOfSport>ujumine</spor:typeOfSport>
+         <spor:requestId>123</spor:requestId>
+      </spor:addEventRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/sportsseries/SeriesPortType/addEventRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="508acd1e-a71b-480d-b59b-8d4eb816e24c" isOneWay="false" action="" name="addSeries" bindingOperationName="addSeries" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c41a171e-8e28-4826-8b85-cdb23413226a" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spor="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spor:addSeriesRequest>
+         <spor:token>salasona</spor:token>
+         <spor:SeriesName>jooksusari</spor:SeriesName>
+         <spor:SeriesStartDate>2017-04-29</spor:SeriesStartDate>
+         <spor:SeriesEndDate>2017-09-29</spor:SeriesEndDate>
+         <spor:numOfEvents>5</spor:numOfEvents>
+         <spor:typeOfSport>jooks</spor:typeOfSport>
+      </spor:addSeriesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/sportsseries/SeriesPortType/addSeriesRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="06d26050-bed7-444f-a1db-98dcbb5e1a64" isOneWay="false" action="" name="addSeriesEvent" bindingOperationName="addSeriesEvent" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="63da7195-dda4-45fc-bbaa-0af57a4c9d31" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spor="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spor:addSeriesEventRequest>
+         <spor:token>salasona</spor:token>
+         <spor:SeriesId>2</spor:SeriesId>
+         <spor:EventId>1</spor:EventId>
+      </spor:addSeriesEventRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/sportsseries/SeriesPortType/addSeriesEventRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="b7001b91-8a1b-463d-a913-d1b9d9c3a2c4" isOneWay="false" action="" name="getEvent" bindingOperationName="getEvent" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4d09d48f-7e69-45c7-a285-a82db44c778c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spor="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spor:getEventRequest>
+         <spor:token>salasona</spor:token>
+         <spor:id>2</spor:id>
+      </spor:getEventRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/sportsseries/SeriesPortType/getEventRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="f334ea6e-8fff-4530-b1f1-bd6edc1ffbde" isOneWay="false" action="" name="getEventList" bindingOperationName="getEventList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="22244b5f-4019-4020-8d73-546c599ffc22" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spor="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spor:getEventListRequest>
+         <spor:token>salasona</spor:token>
+      </spor:getEventListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/sportsseries/SeriesPortType/getEventListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="26c1fc84-8966-4200-b325-0f9aeb9e4706" isOneWay="false" action="" name="getSeries" bindingOperationName="getSeries" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="79e1580a-0d26-4920-903a-6fe6a1eafe99" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spor="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spor:getSeriesRequest>
+         <spor:token>salasona</spor:token>
+         <spor:id>2</spor:id>
+         <spor:requestId>?</spor:requestId>
+      </spor:getSeriesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/sportsseries/SeriesPortType/getSeriesRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3c29e3d5-b1f4-47e2-8232-70352baeb40e" isOneWay="false" action="" name="getSeriesEventList" bindingOperationName="getSeriesEventList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="36e8dc78-157e-4c44-bd50-a77ea2c90f31" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spor="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spor:getSeriesEventListRequest>
+         <spor:token>salasona</spor:token>
+         <spor:SeriesId>2</spor:SeriesId>
+         <spor:requestId></spor:requestId>
+      </spor:getSeriesEventListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/sportsseries/SeriesPortType/getSeriesEventListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d3cced78-49a8-4af1-865d-3e6486f173c8" isOneWay="false" action="" name="getSeriesList" bindingOperationName="getSeriesList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e40d843b-92b0-4028-bd04-1b871f3bcf90" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tahe-kais-macbook-air.local:8080/SportsServiceWebApplication/SeriesService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spor="http://www.ttu.ee/idu0075/2017/ws/sportsseries">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <spor:getSeriesListRequest>
+         <spor:token>?</spor:token>
+         <spor:startDate>?</spor:startDate>
+         <spor:endDate>?</spor:endDate>
+         <spor:requestId>?</spor:requestId>
+      </spor:getSeriesListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/sportsseries/SeriesPortType/getSeriesListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
