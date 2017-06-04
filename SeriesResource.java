@@ -123,6 +123,7 @@ public class SeriesResource {
         request.setSeriesEndDate(content.getSeriesEndDate());
         request.setTypeOfSport(content.getTypeOfSport());
         request.setNumOfEvents(content.getNumOfEvents());
+        request.setRequestId(content.getRequestId());
         return ws.addSeries(request);    
     }
     

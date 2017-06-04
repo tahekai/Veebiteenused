@@ -33,6 +33,8 @@ import javax.xml.datatype.DatatypeConstants;
     
     static List<EventType> eventList = new ArrayList<EventType>();
     static List<SeriesType> seriesList = new ArrayList<SeriesType>();
+    static List<String> RequestIdList = new ArrayList<String>();
+    
    
     
     
@@ -54,15 +56,26 @@ import javax.xml.datatype.DatatypeConstants;
 
     public ee.ttu.idu0075._2017.ws.sportsseries.EventType addEvent(ee.ttu.idu0075._2017.ws.sportsseries.AddEventRequest parameter) {
         EventType et = null;  
-        if (parameter.getToken().equalsIgnoreCase("salasona")) {
+        if (parameter.getToken().equalsIgnoreCase("salasona") && !RequestIdList.isEmpty() ) {
+            for (String id : RequestIdList) {
+                if (parameter.getRequestId().equalsIgnoreCase(id)){
+                    return null;
+                }
+            }
+        }
+        if (parameter.getToken().equalsIgnoreCase("salasona") ){
             et = new EventType();
             et.setId(BigInteger.valueOf(nextEventId++));
             et.setName(parameter.getName());
             et.setPlace(parameter.getPlace());
             et.setDate(parameter.getDate());
             et.setTypeOfSport(parameter.getTypeOfSport());
+            et.setRequestId(parameter.getRequestId());
             
             eventList.add(et);
+            RequestIdList.add(parameter.getRequestId());
+                    
+                
             
             
         }
@@ -93,7 +106,15 @@ import javax.xml.datatype.DatatypeConstants;
     }
 
     public ee.ttu.idu0075._2017.ws.sportsseries.SeriesType addSeries(ee.ttu.idu0075._2017.ws.sportsseries.AddSeriesRequest parameter) {
-       SeriesType st = null;  
+        SeriesType st = null; 
+        if (parameter.getToken().equalsIgnoreCase("salasona") && !RequestIdList.isEmpty() ) {
+            for (String id : RequestIdList) {
+                if (parameter.getRequestId().equalsIgnoreCase(id)){
+                    return null;
+                }
+            }
+        }
+       
         if (parameter.getToken().equalsIgnoreCase("salasona")) {
             st = new SeriesType();
             st.setId(BigInteger.valueOf(nextEventId++));
@@ -102,9 +123,10 @@ import javax.xml.datatype.DatatypeConstants;
             st.setSeriesStartDate(parameter.getSeriesStartDate());
             st.setSeriesEndDate(parameter.getSeriesEndDate());
             st.setNumOfEvents(parameter.getNumOfEvents());
+            st.setRequestId(parameter.getRequestId());
             
             seriesList.add(st);
-            
+            RequestIdList.add(parameter.getRequestId());
             
         }
         return st;
@@ -115,7 +137,13 @@ import javax.xml.datatype.DatatypeConstants;
         if (parameter.getToken().equalsIgnoreCase("salasona")) {
             for (SeriesType seriesType : seriesList) {
                 if ( (parameter.getStartDate() != null && parameter.getStartDate().compare(seriesType.getSeriesStartDate())== DatatypeConstants.LESSER)
-                    && (parameter.getEndDate() != null && parameter.getEndDate().compare(seriesType.getSeriesEndDate())== DatatypeConstants.GREATER)    
+                    && (parameter.getEndDate() != null && parameter.getEndDate().compare(seriesType.getSeriesEndDate())== DatatypeConstants.GREATER)
+                    && (parameter.getMinNumOfEvents() != null && parameter.getMinNumOfEvents().compareTo(seriesType.getNumOfEvents())== DatatypeConstants.LESSER)
+                        
+                    /*|| (((parameter.getSeriesName() != null) && (seriesType.getSeriesName().equals(parameter.getSeriesName()))) 
+                    && (parameter.getStartDate() != null && parameter.getStartDate().compare(seriesType.getSeriesStartDate())== DatatypeConstants.LESSER)
+                    && (parameter.getEndDate() != null && parameter.getEndDate().compare(seriesType.getSeriesEndDate())== DatatypeConstants.GREATER)
+                        )*/
                         ){
                     response.getSeries().add(seriesType);
                 }
@@ -143,14 +171,14 @@ import javax.xml.datatype.DatatypeConstants;
         SeriesEventType seriesEvent = new SeriesEventType();
         if (parameter.getToken().equalsIgnoreCase("salasona")){
             GetEventRequest eventRequest = new GetEventRequest();
-            GetSeriesRequest seriesRequest = new GetSeriesRequest();
+            //GetSeriesRequest seriesRequest = new GetSeriesRequest();
             eventRequest.setId(parameter.getEventId());
             eventRequest.setToken(parameter.getToken());
-            seriesRequest.setId(parameter.getSeriesId());
-            seriesRequest.setToken(parameter.getToken());
+            //seriesRequest.setId(parameter.getSeriesId());
+            //seriesRequest.setToken(parameter.getToken());
             
             seriesEvent.setEvent(getEvent(eventRequest));
-            seriesEvent.setSeries(getSeries(seriesRequest));
+            //seriesEvent.setSeries(getSeries(seriesRequest));
             
             for (int i = 0; i < seriesList.size(); i++) {
                 if (seriesList.get(i).getId().equals(parameter.getSeriesId())) {
